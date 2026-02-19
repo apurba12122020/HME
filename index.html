@@ -1,0 +1,1784 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hassan Mahmud Emon - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #3b82f6;
+            --accent2: #8b5cf6;
+            --glow: rgba(59, 130, 246, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #030712;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+            border-radius: 10px;
+        }
+
+        /* Animated Background */
+        .bg-grid {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatOrb 20s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 500px; height: 500px;
+            background: #3b82f6;
+            top: -100px; right: -100px;
+            animation-delay: 0s;
+        }
+        .orb-2 {
+            width: 400px; height: 400px;
+            background: #8b5cf6;
+            bottom: -50px; left: -100px;
+            animation-delay: -7s;
+        }
+        .orb-3 {
+            width: 300px; height: 300px;
+            background: #06b6d4;
+            top: 50%; left: 50%;
+            animation-delay: -14s;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -80px) scale(1.1); }
+            50% { transform: translate(-30px, 60px) scale(0.9); }
+            75% { transform: translate(70px, 30px) scale(1.05); }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(0px);
+            background: transparent;
+        }
+        .navbar.scrolled {
+            backdrop-filter: blur(20px);
+            background: rgba(3, 7, 18, 0.8);
+            border-bottom: 1px solid rgba(59,130,246,0.1);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 280px; height: 280px;
+        }
+
+        .hero-image-border {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
+            animation: spinBorder 4s linear infinite;
+        }
+
+        @keyframes spinBorder {
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-image {
+            position: relative;
+            width: 280px; height: 280px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #030712;
+            z-index: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #22c55e;
+        }
+
+        .status-dot {
+            width: 8px; height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid #3b82f6;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40) 1s forwards, blink 0.75s step-end infinite;
+            width: 0;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Section Styles */
+        .section-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-line {
+            width: 60px; height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+            margin-bottom: 2rem;
+        }
+
+        /* Cards */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(59,130,246,0.05), transparent, rgba(139,92,246,0.05));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.1);
+        }
+
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px; top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, #3b82f6, #8b5cf6, transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 20px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -32px; top: 6px;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: #030712;
+            border: 3px solid #3b82f6;
+            z-index: 2;
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            background: #3b82f6;
+            box-shadow: 0 0 15px rgba(59,130,246,0.5);
+        }
+
+        /* Skill Tags */
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Skill Progress */
+        .skill-bar-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Publication Card */
+        .pub-card {
+            background: linear-gradient(135deg, rgba(15,23,42,0.8), rgba(30,41,59,0.6));
+            border: 1px solid rgba(59,130,246,0.15);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pub-card::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(59,130,246,0.1), transparent);
+            border-radius: 50%;
+        }
+
+        /* Contact Form */
+        .contact-input {
+            width: 100%;
+            padding: 14px 20px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: 12px;
+            color: #e2e8f0;
+            font-size: 1rem;
+            transition: all 0.3s;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .contact-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+        }
+
+        .contact-input::placeholder {
+            color: #475569;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(59,130,246,0.3);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary span, .btn-primary i {
+            position: relative; z-index: 1;
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: transparent;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 12px;
+            color: #3b82f6;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-outline:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 28px; height: 2px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: rgba(3, 7, 18, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            font-size: 1.5rem;
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            color: #3b82f6;
+        }
+
+        /* Document Grid */
+        .doc-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(59,130,246,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.4s;
+            cursor: pointer;
+        }
+
+        .doc-card:hover {
+            border-color: rgba(59,130,246,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(59,130,246,0.1);
+        }
+
+        .doc-icon {
+            width: 60px; height: 60px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            font-size: 1.5rem;
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Particle Canvas */
+        #particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Counter Animation */
+        .counter-box {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .counter-num {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Footer */
+        .footer-wave {
+            position: relative;
+        }
+
+        .footer-wave::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, transparent);
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .desktop-nav { display: none; }
+            .section-title { font-size: 2rem; }
+            .hero-image-wrapper { width: 200px; height: 200px; }
+            .hero-image { width: 200px; height: 200px; }
+            .timeline { padding-left: 30px; }
+            .timeline::before { left: 10px; }
+            .timeline-dot { left: -27px; }
+        }
+
+        @media (max-width: 480px) {
+            .section-title { font-size: 1.7rem; }
+            .glass-card { padding: 1.5rem; }
+            .pub-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-grid"></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+    <div class="floating-orb orb-3"></div>
+    <canvas id="particles"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#hero" class="text-xl font-bold" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                HM<span class="text-white" style="-webkit-text-fill-color: #e2e8f0;">Emon</span>
+            </a>
+            <div class="desktop-nav flex items-center gap-8">
+                <a href="#about" class="nav-link text-sm font-medium text-slate-300 hover:text-white">About</a>
+                <a href="#skills" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Skills</a>
+                <a href="#experience" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Experience</a>
+                <a href="#education" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Education</a>
+                <a href="#research" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Research</a>
+                <a href="#certifications" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Certifications</a>
+                <a href="#documents" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Documents</a>
+                <a href="#contact" class="btn-primary text-sm" style="padding: 10px 24px;">
+                    <span>Contact</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#about" onclick="toggleMenu()">About</a>
+        <a href="#skills" onclick="toggleMenu()">Skills</a>
+        <a href="#experience" onclick="toggleMenu()">Experience</a>
+        <a href="#education" onclick="toggleMenu()">Education</a>
+        <a href="#research" onclick="toggleMenu()">Research</a>
+        <a href="#certifications" onclick="toggleMenu()">Certifications</a>
+        <a href="#documents" onclick="toggleMenu()">Documents</a>
+        <a href="#contact" onclick="toggleMenu()">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+        <div class="max-w-7xl mx-auto px-6 w-full section-wrapper">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                <div class="flex-1 text-center lg:text-left order-2 lg:order-1">
+                    <div class="status-badge mb-6 inline-flex">
+                        <div class="status-dot"></div>
+                        Available for Opportunities
+                    </div>
+                    <p class="text-blue-400 font-semibold text-lg mb-2">Hello, I'm</p>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight" style="font-family: 'Playfair Display', serif;">
+                        <span style="background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Hassan Mahmud</span>
+                        <br>
+                        <span style="background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Emon</span>
+                    </h1>
+                    <div class="mb-6 h-8 overflow-hidden">
+                        <p class="text-slate-400 text-lg md:text-xl" id="typeText"></p>
+                    </div>
+                    <p class="text-slate-400 text-base md:text-lg max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+                        MSc Data Science student at University of South Wales. Passionate about data-driven solutions, machine learning, and research.
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                        <a href="#contact" class="btn-primary">
+                            <span>Get in Touch</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </a>
+                        <a href="#experience" class="btn-outline">
+                            <span>View My Work</span>
+                            <i class="fas fa-briefcase"></i>
+                        </a>
+                    </div>
+                    <div class="flex gap-5 mt-8 justify-center lg:justify-start">
+                        <a href="https://www.linkedin.com/in/hassan-mahmud-emon-688644166/" target="_blank" class="tooltip w-11 h-11 rounded-full border border-slate-700 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-400 transition-all" data-tooltip="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://share.google/Y64bs4CeUD8Aw1pLB" target="_blank" class="tooltip w-11 h-11 rounded-full border border-slate-700 flex items-center justify-center text-slate-400 hover:text-white hover:border-white transition-all" data-tooltip="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://scholar.google.com/citations?hl=en&user=tdyBAbkAAAAJ" target="_blank" class="tooltip w-11 h-11 rounded-full border border-slate-700 flex items-center justify-center text-slate-400 hover:text-green-400 hover:border-green-400 transition-all" data-tooltip="Google Scholar">
+                            <i class="fas fa-graduation-cap"></i>
+                        </a>
+                        <a href="mailto:hassanmahmud1278@gmail.com" class="tooltip w-11 h-11 rounded-full border border-slate-700 flex items-center justify-center text-slate-400 hover:text-red-400 hover:border-red-400 transition-all" data-tooltip="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex-shrink-0 order-1 lg:order-2">
+                    <div class="hero-image-wrapper mx-auto">
+                        <div class="hero-image-border"></div>
+                        <div class="hero-image">
+                            <div style="width:100%;height:100%;background: linear-gradient(135deg, #1e3a5f, #3b1f5e); display:flex;align-items:center;justify-content:center;">
+                                <span style="font-size:5rem; font-family:'Playfair Display',serif; font-weight:800; background: linear-gradient(135deg,#60a5fa,#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">HE</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Stats below image -->
+                    <div class="grid grid-cols-3 gap-4 mt-8">
+                        <div class="counter-box">
+                            <div class="counter-num" data-target="5">0</div>
+                            <div class="text-slate-500 text-xs mt-1">Work Exp</div>
+                        </div>
+                        <div class="counter-box">
+                            <div class="counter-num" data-target="1">0</div>
+                            <div class="text-slate-500 text-xs mt-1">Publication</div>
+                        </div>
+                        <div class="counter-box">
+                            <div class="counter-num" data-target="4">0</div>
+                            <div class="text-slate-500 text-xs mt-1">Certifications</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-24 section-wrapper" id="about">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal">
+                <p class="text-blue-400 font-semibold mb-2 text-sm tracking-widest uppercase">Introduction</p>
+                <h2 class="section-title">About Me</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal-left">
+                    <div class="glass-card">
+                        <div class="flex items-start gap-4 mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-user text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-3">Who I Am</h3>
+                                <p class="text-slate-400 leading-relaxed text-base">
+                                    I am an international student from <span class="text-emerald-400 font-semibold">Bangladesh</span>, eager to apply my skills and abilities in any challenging role. I am able to adapt myself to any environment, and I am eager to show my continuous commitment through my work.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="border-t border-slate-700/50 pt-6 mt-6">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-slate-500 text-sm">Name</p>
+                                    <p class="text-white font-medium">Hassan Mahmud Emon</p>
+                                </div>
+                                <div>
+                                    <p class="text-slate-500 text-sm">Location</p>
+                                    <p class="text-white font-medium">Cardiff, UK</p>
+                                </div>
+                                <div>
+                                    <p class="text-slate-500 text-sm">Email</p>
+                                    <p class="text-white font-medium text-sm">hassanmahmud1278@gmail.com</p>
+                                </div>
+                                <div>
+                                    <p class="text-slate-500 text-sm">Phone</p>
+                                    <p class="text-white font-medium">+447399266924</p>
+                                </div>
+                                <div>
+                                    <p class="text-slate-500 text-sm">Degree</p>
+                                    <p class="text-white font-medium">MSc Data Science</p>
+                                </div>
+                                <div>
+                                    <p class="text-slate-500 text-sm">Languages</p>
+                                    <p class="text-white font-medium">English, Bangla</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal-right">
+                    <div class="space-y-6">
+                        <div class="glass-card" style="padding: 1.5rem;">
+                            <div class="flex items-center gap-4">
+                                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-database text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white">Data Science</h4>
+                                    <p class="text-slate-400 text-sm">Machine Learning, CNN, Deep Learning</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-card" style="padding: 1.5rem;">
+                            <div class="flex items-center gap-4">
+                                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-flask text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white">Research</h4>
+                                    <p class="text-slate-400 text-sm">Published researcher in medical AI</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-card" style="padding: 1.5rem;">
+                            <div class="flex items-center gap-4">
+                                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-cyan-600 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-bullhorn text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white">Digital Marketing</h4>
+                                    <p class="text-slate-400 text-sm">Certified professional in digital marketing</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-card" style="padding: 1.5rem;">
+                            <div class="flex items-center gap-4">
+                                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-people-group text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white">Leadership</h4>
+                                    <p class="text-slate-400 text-sm">Senior member & event organizer at NSUCEC</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="py-24 section-wrapper" id="skills">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal">
+                <p class="text-blue-400 font-semibold mb-2 text-sm tracking-widest uppercase">Expertise</p>
+                <h2 class="section-title">Skills & Proficiencies</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Technical Skills -->
+                <div class="glass-card reveal" style="transition-delay: 0.1s;">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center">
+                            <i class="fas fa-code text-blue-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Technical Skills</h3>
+                    </div>
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 text-sm font-medium">Python</span>
+                                <span class="text-blue-400 text-sm font-semibold">85%</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-fill" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 text-sm font-medium">Git & GitHub</span>
+                                <span class="text-blue-400 text-sm font-semibold">80%</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-fill" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 text-sm font-medium">Machine Learning</span>
+                                <span class="text-blue-400 text-sm font-semibold">75%</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-fill" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 text-sm font-medium">Data Analysis</span>
+                                <span class="text-blue-400 text-sm font-semibold">78%</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-fill" data-width="78"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Languages -->
+                <div class="glass-card reveal" style="transition-delay: 0.2s;">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center">
+                            <i class="fas fa-language text-purple-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Languages</h3>
+                    </div>
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 text-sm font-medium">English</span>
+                                <span class="text-purple-400 text-sm font-semibold">Fluent</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-fill" data-width="92" style="background: linear-gradient(90deg, #8b5cf6, #a78bfa);"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 text-sm font-medium">Bangla</span>
+                                <span class="text-purple-400 text-sm font-semibold">Native</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-fill" data-width="100" style="background: linear-gradient(90deg, #8b5cf6, #a78bfa);"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <h4 class="text-sm font-semibold text-slate-400 mb-3 uppercase tracking-wider">Soft Skills</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag bg-slate-800/50 text-slate-300 border border-slate-700/50 text-xs">
+                                <i class="fas fa-users text-purple-400 text-xs"></i> Teamwork
+                            </span>
+                            <span class="skill-tag bg-slate-800/50 text-slate-300 border border-slate-700/50 text-xs">
+                                <i class="fas fa-comments text-purple-400 text-xs"></i> Communication
+                            </span>
+                            <span class="skill-tag bg-slate-800/50 text-slate-300 border border-slate-700/50 text-xs">
+                                <i class="fas fa-sync text-purple-400 text-xs"></i> Adaptability
+                            </span>
+                            <span class="skill-tag bg-slate-800/50 text-slate-300 border border-slate-700/50 text-xs">
+                                <i class="fas fa-clock text-purple-400 text-xs"></i> Time Management
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional Skills -->
+                <div class="glass-card reveal" style="transition-delay: 0.3s;">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/20 flex items-center justify-center">
+                            <i class="fas fa-briefcase text-cyan-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Professional</h3>
+                    </div>
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 text-sm font-medium">Digital Marketing</span>
+                                <span class="text-cyan-400 text-sm font-semibold">88%</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-fill" data-width="88" style="background: linear-gradient(90deg, #06b6d4, #22d3ee);"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 text-sm font-medium">HR Management</span>
+                                <span class="text-cyan-400 text-sm font-semibold">72%</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-fill" data-width="72" style="background: linear-gradient(90deg, #06b6d4, #22d3ee);"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 text-sm font-medium">Research</span>
+                                <span class="text-cyan-400 text-sm font-semibold">80%</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-fill" data-width="80" style="background: linear-gradient(90deg, #06b6d4, #22d3ee);"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-slate-300 text-sm font-medium">Event Management</span>
+                                <span class="text-cyan-400 text-sm font-semibold">76%</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-fill" data-width="76" style="background: linear-gradient(90deg, #06b6d4, #22d3ee);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Tags -->
+            <div class="mt-12 reveal">
+                <div class="flex flex-wrap justify-center gap-3">
+                    <span class="skill-tag bg-blue-500/10 text-blue-300 border border-blue-500/20">
+                        <i class="fab fa-python"></i> Python
+                    </span>
+                    <span class="skill-tag bg-orange-500/10 text-orange-300 border border-orange-500/20">
+                        <i class="fab fa-git-alt"></i> Git
+                    </span>
+                    <span class="skill-tag bg-slate-500/10 text-slate-300 border border-slate-500/20">
+                        <i class="fab fa-github"></i> GitHub
+                    </span>
+                    <span class="skill-tag bg-green-500/10 text-green-300 border border-green-500/20">
+                        <i class="fas fa-brain"></i> Machine Learning
+                    </span>
+                    <span class="skill-tag bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                        <i class="fas fa-network-wired"></i> CNN
+                    </span>
+                    <span class="skill-tag bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                        <i class="fas fa-chart-bar"></i> Data Analysis
+                    </span>
+                    <span class="skill-tag bg-pink-500/10 text-pink-300 border border-pink-500/20">
+                        <i class="fas fa-ad"></i> Digital Marketing
+                    </span>
+                    <span class="skill-tag bg-yellow-500/10 text-yellow-300 border border-yellow-500/20">
+                        <i class="fas fa-users-cog"></i> HR Management
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="py-24 section-wrapper" id="experience">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal">
+                <p class="text-blue-400 font-semibold mb-2 text-sm tracking-widest uppercase">Career Path</p>
+                <h2 class="section-title">Work Experience</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="timeline">
+                <!-- Experience 1 -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="flex flex-wrap items-center gap-3 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold border border-blue-500/20">2024 - Present</span>
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold border border-emerald-500/20">Current</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Warehouse Operative</h3>
+                        <p class="text-blue-400 font-medium mb-3">Tesco Avonmouth Distribution Centre, Bristol</p>
+                        <p class="text-slate-400 text-sm leading-relaxed">Responsible for receiving and distributing foods and products in a warehouse environment. Ensuring efficient stock management and maintaining high operational standards.</p>
+                    </div>
+                </div>
+
+                <!-- Experience 2 -->
+                <div class="timeline-item reveal" style="transition-delay: 0.1s;">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="flex flex-wrap items-center gap-3 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold border border-blue-500/20">2024 - Present</span>
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold border border-emerald-500/20">Current</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Warehouse Operative</h3>
+                        <p class="text-blue-400 font-medium mb-3">Challenge TRG</p>
+                        <p class="text-slate-400 text-sm leading-relaxed">Responsible for receiving and distributing foods in a warehouse. Managing inventory flow and maintaining quality control procedures.</p>
+                    </div>
+                </div>
+
+                <!-- Experience 3 -->
+                <div class="timeline-item reveal" style="transition-delay: 0.2s;">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="flex flex-wrap items-center gap-3 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold border border-blue-500/20">2023 - 2024</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Restaurant Team Member</h3>
+                        <p class="text-blue-400 font-medium mb-3">Merigos Piri Piri, Chillox</p>
+                        <p class="text-slate-400 text-sm leading-relaxed">Responsible for serving food and drinks, cleanliness and maintenance, processing bills, handling cash or card transactions accurately, and ensuring customer satisfaction.</p>
+                    </div>
+                </div>
+
+                <!-- Experience 4 -->
+                <div class="timeline-item reveal" style="transition-delay: 0.3s;">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="flex flex-wrap items-center gap-3 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold border border-blue-500/20">2019 - 2023</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Senior Member</h3>
+                        <p class="text-blue-400 font-medium mb-3">NSUCEC Club, North South University</p>
+                        <p class="text-slate-400 text-sm leading-relaxed">Responsible for hiring people, organizing events, and leading club activities. Played a key role in team coordination and event management.</p>
+                    </div>
+                </div>
+
+                <!-- Experience 5 -->
+                <div class="timeline-item reveal" style="transition-delay: 0.4s;">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card">
+                        <div class="flex flex-wrap items-center gap-3 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold border border-blue-500/20">2023</span>
+                            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-xs font-semibold border border-purple-500/20">Research</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Researcher</h3>
+                        <p class="text-blue-400 font-medium mb-3">Supervised by Dr. Mohammad Monirujjaman Khan</p>
+                        <p class="text-slate-400 text-sm leading-relaxed">Responsible for reading existing papers, feature selection of data, and model implementation. Contributed to published research on kidney cancer prediction using CNN.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="py-24 section-wrapper" id="education">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal">
+                <p class="text-blue-400 font-semibold mb-2 text-sm tracking-widest uppercase">Academic Journey</p>
+                <h2 class="section-title">Education</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- MSc -->
+                <div class="glass-card reveal-left relative overflow-visible">
+                    <div class="absolute -top-4 -right-4 w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30" style="z-index:2;">
+                        <i class="fas fa-award text-white text-2xl"></i>
+                    </div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold border border-emerald-500/20">In Progress</span>
+                        <span class="text-slate-500 text-sm">Sept 2024 - Sept 2025</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">MSc in Data Science</h3>
+                    <p class="text-blue-400 font-semibold mb-4">University of South Wales</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">Currently pursuing a Master's degree in Data Science, focusing on advanced analytics, machine learning algorithms, and data-driven decision making.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="text-xs px-2 py-1 rounded bg-slate-800 text-slate-400">Machine Learning</span>
+                        <span class="text-xs px-2 py-1 rounded bg-slate-800 text-slate-400">Data Analytics</span>
+                        <span class="text-xs px-2 py-1 rounded bg-slate-800 text-slate-400">Statistics</span>
+                    </div>
+                </div>
+
+                <!-- BSc -->
+                <div class="glass-card reveal-right relative overflow-visible">
+                    <div class="absolute -top-4 -right-4 w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30" style="z-index:2;">
+                        <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold border border-blue-500/20">Graduated</span>
+                        <span class="text-slate-500 text-sm">2018 - 2023</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Bachelor's in Electrical & Computer Engineering</h3>
+                    <p class="text-purple-400 font-semibold mb-4">North South University, Bangladesh</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">Successfully completed undergraduate studies in Electrical and Computer Engineering with focus on signal processing, circuits, and computer systems.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="text-xs px-2 py-1 rounded bg-slate-800 text-slate-400">ECE</span>
+                        <span class="text-xs px-2 py-1 rounded bg-slate-800 text-slate-400">Signal Processing</span>
+                        <span class="text-xs px-2 py-1 rounded bg-slate-800 text-slate-400">Computer Systems</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section class="py-24 section-wrapper" id="research">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal">
+                <p class="text-blue-400 font-semibold mb-2 text-sm tracking-widest uppercase">Academic Contribution</p>
+                <h2 class="section-title">Research & Publication</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="pub-card reveal">
+                <div class="relative z-10">
+                    <div class="flex flex-wrap items-center gap-3 mb-4">
+                        <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-semibold border border-amber-500/20">
+                            <i class="fas fa-star mr-1"></i> Published 2024
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold border border-blue-500/20">
+                            <i class="fas fa-quote-left mr-1"></i> Cited by 1
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-xs font-semibold border border-purple-500/20">
+                            <i class="fas fa-book mr-1"></i> Journal Article
+                        </span>
+                    </div>
+                    
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-3 leading-tight">
+                        Kidney Cancerous Tumor Prediction using CNN System Architecture
+                    </h3>
+                    
+                    <p class="text-slate-400 text-sm mb-4">
+                        <span class="text-slate-300 font-medium">Authors:</span> Md Fahim Shahoriar Titu, <span class="text-blue-400 font-medium">Md Hassan Mahmud Emon</span>, Sk Azmiara Aumi, Md Sihab Bhuiyan, Md Rohanur Rahman, Md Fazayel Murshid
+                    </p>
+                    
+                    <div class="grid sm:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-slate-800/50 rounded-xl p-3">
+                            <p class="text-slate-500 text-xs mb-1">Journal</p>
+                            <p class="text-white text-sm font-medium">Asian Journal Of Medical Technology</p>
+                        </div>
+                        <div class="bg-slate-800/50 rounded-xl p-3">
+                            <p class="text-slate-500 text-xs mb-1">Volume / Issue</p>
+                            <p class="text-white text-sm font-medium">Vol. 4, Issue 1</p>
+                        </div>
+                        <div class="bg-slate-800/50 rounded-xl p-3">
+                            <p class="text-slate-500 text-xs mb-1">Pages</p>
+                            <p class="text-white text-sm font-medium">57-70</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/30 rounded-xl p-5 mb-6 border-l-4 border-blue-500">
+                        <h4 class="text-sm font-bold text-white mb-2">Abstract</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed" id="abstractText">
+                            The study addresses the challenge of interobserver variability in treatment decisions for kidney cancers. We propose an end-to-end deep learning model leveraging multi-phase CT scans to differentiate between five primary histologic subtypes of kidney cancers. The results showed AUC scores of 0.97 and 0.99 for distinguishing between cancerous tumors and adenomas...
+                        </p>
+                        <button class="text-blue-400 text-sm mt-2 hover:underline font-medium" onclick="toggleAbstract()">
+                            <span id="abstractBtn">Read More</span> <i class="fas fa-chevron-down ml-1" id="abstractIcon"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3">
+                        <a href="https://doi.org/10.32896/ajmedtech.v4n1" target="_blank" class="btn-primary text-sm" style="padding: 10px 20px;">
+                            <span>View Paper</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <a href="https://scholar.google.com/citations?hl=en&user=tdyBAbkAAAAJ" target="_blank" class="btn-outline text-sm" style="padding: 10px 20px;">
+                            <span>Google Scholar</span>
+                            <i class="fas fa-graduation-cap"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="py-24 section-wrapper" id="certifications">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal">
+                <p class="text-blue-400 font-semibold mb-2 text-sm tracking-widest uppercase">Achievements</p>
+                <h2 class="section-title">Certifications</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Cert 1 -->
+                <div class="glass-card text-center reveal" style="transition-delay: 0.1s;">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-rose-500/20 to-rose-600/20 flex items-center justify-center">
+                        <i class="fas fa-bullhorn text-rose-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">Digital Marketing</h3>
+                    <p class="text-slate-400 text-sm mb-3">ASTRA IT INSTITUTE</p>
+                    <span class="px-3 py-1 rounded-full bg-rose-500/10 text-rose-400 text-xs font-semibold border border-rose-500/20">Certified</span>
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="glass-card text-center reveal" style="transition-delay: 0.2s;">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center">
+                        <i class="fas fa-microchip text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">Computer & Engineering Club</h3>
+                    <p class="text-slate-400 text-sm mb-3">NSUCEC</p>
+                    <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold border border-blue-500/20">Member</span>
+                </div>
+
+                <!-- Cert 3 -->
+                <div class="glass-card text-center reveal" style="transition-delay: 0.3s;">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/20 flex items-center justify-center">
+                        <i class="fab fa-git-alt text-amber-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">Git, GitHub & Python</h3>
+                    <p class="text-slate-400 text-sm mb-3">MindLuster</p>
+                    <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-semibold border border-amber-500/20">Completed</span>
+                </div>
+
+                <!-- Cert 4 -->
+                <div class="glass-card text-center reveal" style="transition-delay: 0.4s;">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 flex items-center justify-center">
+                        <i class="fas fa-people-group text-emerald-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">Human Resource Management</h3>
+                    <p class="text-slate-400 text-sm mb-3">Great Learning Academy</p>
+                    <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold border border-emerald-500/20">Completed</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documents Section -->
+    <section class="py-24 section-wrapper" id="documents">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal">
+                <p class="text-blue-400 font-semibold mb-2 text-sm tracking-widest uppercase">Portfolio</p>
+                <h2 class="section-title">Documents & Files</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div class="doc-card reveal" style="transition-delay: 0.05s;">
+                    <div class="doc-icon bg-blue-500/10">
+                        <i class="fas fa-file-word text-blue-400"></i>
+                    </div>
+                    <p class="text-white text-sm font-medium">CV / Resume</p>
+                    <p class="text-slate-500 text-xs mt-1">EmonCV.docx</p>
+                </div>
+                <div class="doc-card reveal" style="transition-delay: 0.1s;">
+                    <div class="doc-icon bg-purple-500/10">
+                        <i class="fas fa-image text-purple-400"></i>
+                    </div>
+                    <p class="text-white text-sm font-medium">Photo</p>
+                    <p class="text-slate-500 text-xs mt-1">Emon.jpeg</p>
+                </div>
+                <div class="doc-card reveal" style="transition-delay: 0.15s;">
+                    <div class="doc-icon bg-amber-500/10">
+                        <i class="fas fa-certificate text-amber-400"></i>
+                    </div>
+                    <p class="text-white text-sm font-medium">Certificate</p>
+                    <p class="text-slate-500 text-xs mt-1">Certificate.jpeg</p>
+                </div>
+                <div class="doc-card reveal" style="transition-delay: 0.2s;">
+                    <div class="doc-icon bg-emerald-500/10">
+                        <i class="fas fa-file-contract text-emerald-400"></i>
+                    </div>
+                    <p class="text-white text-sm font-medium">Testimonial</p>
+                    <p class="text-slate-500 text-xs mt-1">Testimonial.jpeg</p>
+                </div>
+                <div class="doc-card reveal" style="transition-delay: 0.25s;">
+                    <div class="doc-icon bg-rose-500/10">
+                        <i class="fas fa-envelope-open-text text-rose-400"></i>
+                    </div>
+                    <p class="text-white text-sm font-medium">LOR 01</p>
+                    <p class="text-slate-500 text-xs mt-1">LOR01.jpeg</p>
+                </div>
+                <div class="doc-card reveal" style="transition-delay: 0.3s;">
+                    <div class="doc-icon bg-rose-500/10">
+                        <i class="fas fa-envelope-open-text text-rose-400"></i>
+                    </div>
+                    <p class="text-white text-sm font-medium">LOR 02</p>
+                    <p class="text-slate-500 text-xs mt-1">LOR02.jpeg</p>
+                </div>
+                <div class="doc-card reveal" style="transition-delay: 0.35s;">
+                    <div class="doc-icon bg-cyan-500/10">
+                        <i class="fas fa-id-card text-cyan-400"></i>
+                    </div>
+                    <p class="text-white text-sm font-medium">MOI</p>
+                    <p class="text-slate-500 text-xs mt-1">MOI.jpeg</p>
+                </div>
+                <div class="doc-card reveal" style="transition-delay: 0.4s;">
+                    <div class="doc-icon bg-indigo-500/10">
+                        <i class="fas fa-scroll text-indigo-400"></i>
+                    </div>
+                    <p class="text-white text-sm font-medium">SSC Certificate</p>
+                    <p class="text-slate-500 text-xs mt-1">SSC.jpeg</p>
+                </div>
+                <div class="doc-card reveal" style="transition-delay: 0.45s;">
+                    <div class="doc-icon bg-indigo-500/10">
+                        <i class="fas fa-scroll text-indigo-400"></i>
+                    </div>
+                    <p class="text-white text-sm font-medium">HSC Certificate</p>
+                    <p class="text-slate-500 text-xs mt-1">HSC.jpeg</p>
+                </div>
+                <div class="doc-card reveal" style="transition-delay: 0.5s;">
+                    <div class="doc-icon bg-green-500/10">
+                        <i class="fas fa-file-pdf text-green-400"></i>
+                    </div>
+                    <p class="text-white text-sm font-medium">Course Completion</p>
+                    <p class="text-slate-500 text-xs mt-1">PDF</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-24 section-wrapper" id="contact">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="reveal">
+                <p class="text-blue-400 font-semibold mb-2 text-sm tracking-widest uppercase">Get in Touch</p>
+                <h2 class="section-title">Contact Me</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="grid lg:grid-cols-5 gap-12">
+                <!-- Contact Info -->
+                <div class="lg:col-span-2 space-y-6 reveal-left">
+                    <p class="text-slate-400 leading-relaxed">Feel free to reach out to me for any inquiries, collaborations, or opportunities. I'm always open to new challenges!</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Address</h4>
+                                <p class="text-slate-400 text-sm">1 Despenser Gardens, Cardiff, CF11 6AY</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-purple-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Phone</h4>
+                                <a href="tel:+447399266924" class="text-slate-400 text-sm hover:text-blue-400 transition-colors">+44 7399 266924</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-cyan-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Email</h4>
+                                <a href="mailto:hassanmahmud1278@gmail.com" class="text-slate-400 text-sm hover:text-blue-400 transition-colors">hassanmahmud1278@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <h4 class="text-white font-semibold mb-4">Connect With Me</h4>
+                        <div class="flex gap-3">
+                            <a href="https://www.linkedin.com/in/hassan-mahmud-emon-688644166/" target="_blank" class="w-12 h-12 rounded-xl bg-[#0077b5]/10 flex items-center justify-center text-[#0077b5] hover:bg-[#0077b5]/20 transition-all border border-[#0077b5]/20">
+                                <i class="fab fa-linkedin-in text-lg"></i>
+                            </a>
+                            <a href="https://share.google/Y64bs4CeUD8Aw1pLB" target="_blank" class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-white hover:bg-white/10 transition-all border border-white/10">
+                                <i class="fab fa-github text-lg"></i>
+                            </a>
+                            <a href="https://scholar.google.com/citations?hl=en&user=tdyBAbkAAAAJ" target="_blank" class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 hover:bg-blue-500/20 transition-all border border-blue-500/20">
+                                <i class="fas fa-graduation-cap text-lg"></i>
+                            </a>
+                            <a href="mailto:hassanmahmud1278@gmail.com" class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400 hover:bg-red-500/20 transition-all border border-red-500/20">
+                                <i class="fas fa-envelope text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-3 reveal-right">
+                    <div class="glass-card">
+                        <form id="contactForm" onsubmit="handleSubmit(event)">
+                            <div class="grid sm:grid-cols-2 gap-5 mb-5">
+                                <div>
+                                    <label class="text-sm font-medium text-slate-300 mb-2 block">Your Name</label>
+                                    <input type="text" class="contact-input" placeholder="John Doe" required>
+                                </div>
+                                <div>
+                                    <label class="text-sm font-medium text-slate-300 mb-2 block">Your Email</label>
+                                    <input type="email" class="contact-input" placeholder="john@example.com" required>
+                                </div>
+                            </div>
+                            <div class="mb-5">
+                                <label class="text-sm font-medium text-slate-300 mb-2 block">Subject</label>
+                                <input type="text" class="contact-input" placeholder="How can I help you?" required>
+                            </div>
+                            <div class="mb-6">
+                                <label class="text-sm font-medium text-slate-300 mb-2 block">Message</label>
+                                <textarea class="contact-input" rows="5" placeholder="Your message here..." required style="resize: vertical;"></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary w-full justify-center">
+                                <span>Send Message</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                        <div id="formSuccess" class="hidden text-center py-8">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                                <i class="fas fa-check text-emerald-400 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Message Sent!</h3>
+                            <p class="text-slate-400">Thank you for reaching out. I'll get back to you soon!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-wave py-12 section-wrapper" style="background: rgba(15,23,42,0.5);">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <a href="#hero" class="text-xl font-bold" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        HM<span style="-webkit-text-fill-color: #e2e8f0;">Emon</span>
+                    </a>
+                    <p class="text-slate-500 text-sm mt-1">MSc Data Science • University of South Wales</p>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="#about" class="text-slate-400 text-sm hover:text-white transition-colors">About</a>
+                    <a href="#experience" class="text-slate-400 text-sm hover:text-white transition-colors">Experience</a>
+                    <a href="#research" class="text-slate-400 text-sm hover:text-white transition-colors">Research</a>
+                    <a href="#contact" class="text-slate-400 text-sm hover:text-white transition-colors">Contact</a>
+                </div>
+                <p class="text-slate-600 text-sm">&copy; 2025 Hassan Mahmud Emon. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/30 opacity-0 pointer-events-none transition-all z-50 hover:scale-110" style="transform: translateY(20px);">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Particle Background
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.3 + 0.1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(59, 130, 246, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 80; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, i) => {
+                p.update();
+                p.draw();
+                particles.forEach((p2, j) => {
+                    if (i !== j) {
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 120) {
+                            ctx.strokeStyle = `rgba(59, 130, 246, ${0.05 * (1 - dist / 120)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    }
+                });
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // Typewriter Effect
+        const roles = [
+            "MSc Data Science Student",
+            "Research Enthusiast",
+            "Digital Marketing Professional",
+            "Machine Learning Developer"
+        ];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeTextEl = document.getElementById('typeText');
+
+        function typeWriter() {
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                typeTextEl.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeTextEl.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 30 : 80;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+        typeWriter();
+
+        // Navbar Scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.style.opacity = '1';
+                backToTop.style.pointerEvents = 'auto';
+                backToTop.style.transform = 'translateY(0)';
+            } else {
+                backToTop.style.opacity = '0';
+                backToTop.style.pointerEvents = 'none';
+                backToTop.style.transform = 'translateY(20px)';
+            }
+        });
+
+        // Mobile Menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.getElementById('hamburger');
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        // Scroll Reveal
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const revealPoint = 120;
+                
+                if (elementTop < windowHeight - revealPoint) {
+                    el.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Skill Bar Animation
+        function animateSkillBars() {
+            const bars = document.querySelectorAll('.skill-bar-fill');
+            bars.forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 50) {
+                    bar.style.width = bar.getAttribute('data-width') + '%';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateSkillBars);
+        window.addEventListener('load', animateSkillBars);
+
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter-num');
+            counters.forEach(counter => {
+                const rect = counter.getBoundingClientRect();
+                if (rect.top < window.innerHeight && !counter.classList.contains('counted')) {
+                    counter.classList.add('counted');
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    let current = 0;
+                    const increment = target / 40;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            counter.textContent = target + '+';
+                            clearInterval(timer);
+                        } else {
+                            counter.textContent = Math.ceil(current) + '+';
+                        }
+                    }, 50);
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateCounters);
+        window.addEventListener('load', animateCounters);
+
+        // Active Nav Link
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Abstract Toggle
+        const fullAbstract = `The study addresses the challenge of interobserver variability in the treatment decisions for kidney cancers, a concern highlighted by the anticipated 73,750 kidney cancer diagnoses in the United States in 2020. This variability often arises due to the subtle differences in imaging characteristics of tumor subtypes. To address this issue, we propose an end-to-end deep learning model leveraging multi-phase CT scans to differentiate between five primary histologic subtypes of kidney cancers, encompassing both benign and malignant tumors. The proposed model demonstrates remarkable precision in identifying kidney cancers, even those of minimal size. In preparing the data for analysis, we divided it into training and validation test sets. The training set was used to employ the random forest method for ranking potential predictors based on their predictive importance. The model's performance was then validated on the test set using leave-one-out cross-validation. This study utilized convolutional and recurrent neural networks to predict kidney cancer outcomes. We used the models to classify adenoma, adenocarcinoma, and non-neoplastic whole slide images (WSIs). The evaluation of our models was conducted using three distinct test sets. The results showed area under the curve scores of 0.97 and 0.99 for distinguishing between cancerous tumors and adenomas and 0.96 and 0.99 for differentiating between kidney cancer and adenomas, respectively. These findings suggest that our models are not only generalizable but also hold significant potential to integrate and deploy into realistic pathological diagnostic workflows of kidney cancer.`;
+        
+        const shortAbstract = `The study addresses the challenge of interobserver variability in treatment decisions for kidney cancers. We propose an end-to-end deep learning model leveraging multi-phase CT scans to differentiate between five primary histologic subtypes of kidney cancers. The results showed AUC scores of 0.97 and 0.99 for distinguishing between cancerous tumors and adenomas...`;
+
+        let abstractExpanded = false;
+
+        function toggleAbstract() {
+            const text = document.getElementById('abstractText');
+            const btn = document.getElementById('abstractBtn');
+            const icon = document.getElementById('abstractIcon');
+            
+            abstractExpanded = !abstractExpanded;
+            text.textContent = abstractExpanded ? fullAbstract : shortAbstract;
+            btn.textContent = abstractExpanded ? 'Show Less' : 'Read More';
+            icon.style.transform = abstractExpanded ? 'rotate(180deg)' : 'rotate(0)';
+        }
+
+        // Form Submit
+        function handleSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('contactForm');
+            const success = document.getElementById('formSuccess');
+            form.style.display = 'none';
+            success.classList.remove('hidden');
+            
+            setTimeout(() => {
+                form.style.display = 'block';
+                success.classList.add('hidden');
+                form.reset();
+            }, 4000);
+        }
+
+        // Smooth scroll for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = target.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    const offsetPosition = elementPosition - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
