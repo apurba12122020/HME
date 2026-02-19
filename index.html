@@ -124,6 +124,42 @@
         .nav-link.active::after {
             width: 100%;
         }
+        /* ADD THIS NEW CSS HERE - Navigation Profile Image */
+        .nav-profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid transparent;
+            background: linear-gradient(#030712, #030712) padding-box,
+                        linear-gradient(135deg, #3b82f6, #8b5cf6) border-box;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-profile-img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .nav-logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            transition: color 0.3s;
+        }
+
+        .nav-logo:hover .nav-profile-img {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
 
         /* Hero Section */
         .hero-section {
@@ -1787,4 +1823,5 @@
     </script>
 </body>
 </html>
+
 
